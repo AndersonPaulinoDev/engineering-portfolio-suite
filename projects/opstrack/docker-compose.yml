@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: opstrack
+      POSTGRES_PASSWORD: opstrack
+      POSTGRES_DB: opstrack
+    ports:
+      - "5433:5432"
+    volumes:
+      - opstrack_pg:/var/lib/postgresql/data
+      - ./api/migrations/001_init.sql:/docker-entrypoint-initdb.d/001_init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U opstrack -d opstrack"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    image: golang:1.27-alpine
+    working_dir: /app
+    command: ["go", "run", "-tags", "postgres", "./cmd/server"]
+    volumes:
+      - ./api:/app
+    environment:
+      ADDR: :8081
+      AUTH_SECRET: "${AUTH_SECRET:?Set AUTH_SECRET in .env before starting Compose}"
+      DATABASE_URL: postgres://opstrack:opstrack@postgres:5432/opstrack?sslmode=disable
+      DEMO_MODE: "${DEMO_MODE:-false}"
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  opstrack_pg: {}

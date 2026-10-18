@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  go-unit-and-http:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project: [agentwatch, opstrack, scanstock]
+    defaults:
+      run:
+        working-directory: projects/${{ matrix.project }}/api
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.27.x'
+      - run: test -z "$(gofmt -l .)"
+      - run: go vet ./...
+      - run: PERSISTENCE=memory go test ./...
+
+  postgres-integration:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - project: agentwatch
+            db: agentwatch_test
+            user: agentwatch
+          - project: opstrack
+            db: opstrack_test
+            user: opstrack
+          - project: scanstock
+            db: scanstock_test
+            user: scanstock
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: ${{ matrix.user }}
+          POSTGRES_PASSWORD: testpass
+          POSTGRES_DB: ${{ matrix.db }}
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U ${{ matrix.user }} -d ${{ matrix.db }}"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    defaults:
+      run:
+        working-directory: projects/${{ matrix.project }}/api
+    env:
+      TEST_DATABASE_URL: postgres://${{ matrix.user }}:testpass@localhost:5432/${{ matrix.db }}?sslmode=disable
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.27.x'
+      - run: sudo apt-get update && sudo apt-get install -y postgresql-client
+      - run: PGPASSWORD=testpass psql -h localhost -U ${{ matrix.user }} -d ${{ matrix.db }} -f migrations/001_init.sql
+      - run: go test -tags postgres ./...
+
+  mobile-typecheck:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project: [agentwatch, opstrack, scanstock]
+    defaults:
+      run:
+        working-directory: projects/${{ matrix.project }}/mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install
+      - run: npx expo install --check
+      - run: npm run typecheck

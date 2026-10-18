@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: agentwatch
+      POSTGRES_PASSWORD: agentwatch
+      POSTGRES_DB: agentwatch
+    ports:
+      - "5432:5432"
+    volumes:
+      - agentwatch_pg:/var/lib/postgresql/data
+      - ./api/migrations/001_init.sql:/docker-entrypoint-initdb.d/001_init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agentwatch -d agentwatch"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    image: golang:1.27-alpine
+    working_dir: /app
+    command: ["go", "run", "-tags", "postgres", "./cmd/server"]
+    volumes:
+      - ./api:/app
+    environment:
+      ADDR: :8080
+      AUTH_SECRET: "${AUTH_SECRET:?Set AUTH_SECRET in .env before starting Compose}"
+      DATABASE_URL: postgres://agentwatch:agentwatch@postgres:5432/agentwatch?sslmode=disable
+      DEMO_MODE: "${DEMO_MODE:-false}"
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  agentwatch_pg: {}

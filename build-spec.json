@@ -1,0 +1,983 @@
+{
+  "metadata": {
+    "name": "Anderson Paulino Long-Term Engineering Portfolio",
+    "version": "1.0",
+    "status": "build-ready",
+    "source": "PRD \u2014 Long-Term Go + Expo Engineering Portfolio",
+    "primary_stack": [
+      "Go",
+      "TypeScript",
+      "Expo",
+      "React Native"
+    ],
+    "secondary_stack": [
+      "PostgreSQL",
+      "Docker",
+      "Linux",
+      "GitHub Actions"
+    ],
+    "target_platforms": [
+      "iOS",
+      "Android",
+      "Web"
+    ],
+    "backend_development_priority": "Linux-first",
+    "portfolio_horizon": "1-3+ years"
+  },
+  "product": {
+    "overview": "A small ecosystem of production-style software designed to demonstrate independent product engineering across Go backend development, Expo/mobile development, APIs, PostgreSQL, auth, realtime systems, offline-first systems, background jobs, developer tooling, AI-assisted workflows, testing, Docker, CI/CD, Linux development, product design, and technical documentation.",
+    "vision": "Create a portfolio that proves the developer can take an operational problem, design the system, build the backend, build the client, handle real-world states and failures, test it, document it, and deliver a functioning product.",
+    "positioning": "Product-minded full-stack software engineer with strong Go backend, mobile, systems, automation, AI-tooling, and operational software experience.",
+    "quality_bar": {
+      "avoid": [
+        "tutorial",
+        "hackathon prototype",
+        "frontend mockup",
+        "AI-generated dashboard",
+        "CRUD demo",
+        "unfinished SaaS clone"
+      ],
+      "target": "A small production application built by one engineer."
+    },
+    "primary_outcome": "Build three credible software products that provide strong evidence of Go, Expo/mobile, backend, systems, database, and product-engineering ability."
+  },
+  "target_audience": {
+    "primary": [
+      "Software engineering hiring managers",
+      "Backend engineering teams",
+      "Full-stack teams",
+      "Product engineering teams",
+      "Mobile engineering teams",
+      "Developer-tool companies",
+      "AI infrastructure companies",
+      "SaaS companies",
+      "Remote-first technology companies"
+    ],
+    "secondary": [
+      "Freelance clients",
+      "Startup founders",
+      "Technical recruiters",
+      "Open-source collaborators",
+      "Potential business partners"
+    ]
+  },
+  "portfolio_strategy": {
+    "flagship_projects": [
+      "AgentWatch",
+      "OpsTrack",
+      "ScanStock"
+    ],
+    "rationale": "Use three substantial applications that cover different engineering problems instead of many shallow projects.",
+    "project_matrix": {
+      "AgentWatch": {
+        "go_api": true,
+        "expo_react_native": true,
+        "postgresql": true,
+        "realtime": true,
+        "offline_first": "optional",
+        "go_concurrency": true,
+        "background_jobs": true,
+        "complex_business_rules": true,
+        "file_media_handling": "optional",
+        "barcode_qr": false,
+        "notifications": true,
+        "rbac": true,
+        "audit_logs": true,
+        "ai_integration": true,
+        "developer_tooling": true,
+        "operational_software": true,
+        "transaction_integrity": "moderate"
+      },
+      "OpsTrack": {
+        "go_api": true,
+        "expo_react_native": true,
+        "postgresql": true,
+        "realtime": "optional",
+        "offline_first": true,
+        "go_concurrency": true,
+        "background_jobs": true,
+        "complex_business_rules": true,
+        "file_media_handling": true,
+        "barcode_qr": true,
+        "notifications": true,
+        "rbac": true,
+        "audit_logs": true,
+        "ai_integration": "optional",
+        "developer_tooling": false,
+        "operational_software": true,
+        "transaction_integrity": "moderate"
+      },
+      "ScanStock": {
+        "go_api": true,
+        "expo_react_native": true,
+        "postgresql": true,
+        "realtime": "optional",
+        "offline_first": true,
+        "go_concurrency": true,
+        "background_jobs": true,
+        "complex_business_rules": true,
+        "file_media_handling": false,
+        "barcode_qr": true,
+        "notifications": "optional",
+        "rbac": true,
+        "audit_logs": true,
+        "ai_integration": false,
+        "developer_tooling": false,
+        "operational_software": true,
+        "transaction_integrity": "high"
+      }
+    }
+  },
+  "shared_requirements": {
+    "required_for_every_flagship": [
+      "Working application",
+      "Mobile client",
+      "Go backend",
+      "PostgreSQL database",
+      "Local development environment",
+      "Seed/demo data",
+      "Authentication",
+      "Error handling",
+      "Structured logging",
+      "Automated tests",
+      "API documentation",
+      "Architecture documentation",
+      "Screenshots",
+      "Short demo video or GIF",
+      "README",
+      "Docker configuration",
+      "CI pipeline",
+      "Environment configuration",
+      "Example .env",
+      "Database migrations"
+    ],
+    "completion_rule": "A project is not complete merely because the UI works."
+  },
+  "repository_architecture": {
+    "template": {
+      "mobile": [
+        "app/",
+        "components/",
+        "features/",
+        "hooks/",
+        "db/",
+        "services/",
+        "store/",
+        "types/",
+        "tests/"
+      ],
+      "api": {
+        "cmd": [
+          "server/"
+        ],
+        "internal": [
+          "auth/",
+          "config/",
+          "domain/",
+          "http/",
+          "middleware/",
+          "repository/",
+          "service/",
+          "worker/",
+          "events/"
+        ],
+        "migrations": [],
+        "tests": []
+      },
+      "docs": [
+        "architecture.md",
+        "api.md",
+        "decisions/",
+        "screenshots/"
+      ],
+      "root_files": [
+        "docker-compose.yml",
+        "Makefile",
+        "openapi.yaml",
+        ".env.example",
+        "README.md"
+      ],
+      "other_dirs": [
+        "scripts/",
+        ".github/workflows/"
+      ]
+    }
+  },
+  "shared_technology_stack": {
+    "backend": {
+      "language": "Go",
+      "philosophy": "Standard-library-first where practical. Supporting libraries may handle routing, PostgreSQL, migrations, validation, JWT, WebSockets, and testing. Business logic should remain framework-independent."
+    },
+    "mobile": {
+      "framework": "Expo + React Native",
+      "language": "TypeScript",
+      "routing": "Expo Router",
+      "local_persistence": "SQLite",
+      "secure_credentials": "Expo SecureStore",
+      "networking": "Fetch or lightweight typed API client"
+    },
+    "database": {
+      "engine": "PostgreSQL",
+      "required_concepts": [
+        "indexes",
+        "foreign keys",
+        "transactions",
+        "constraints",
+        "migrations",
+        "timestamps",
+        "UUIDs",
+        "pagination",
+        "query optimization",
+        "audit data"
+      ]
+    },
+    "infrastructure": {
+      "development": [
+        "Linux",
+        "Docker",
+        "Docker Compose",
+        "Make",
+        "Git",
+        "GitHub"
+      ],
+      "ci": "GitHub Actions",
+      "ci_checks": [
+        "Go formatting",
+        "Go vet",
+        "Go tests",
+        "Mobile lint",
+        "TypeScript type check",
+        "Mobile tests",
+        "Build validation"
+      ]
+    }
+  },
+  "projects": {
+    "AgentWatch": {
+      "priority": 1,
+      "role": "Primary flagship",
+      "category": "Developer Operations / AI Agent Control Center",
+      "description": "A mobile and web control center for monitoring coding agents, automated workflows, background jobs, and development tasks.",
+      "demonstrates": [
+        "Go concurrency",
+        "Goroutines",
+        "Channels",
+        "Event processing",
+        "WebSockets or SSE",
+        "Background workers",
+        "APIs",
+        "Realtime mobile applications",
+        "Task queues",
+        "State machines",
+        "Authentication",
+        "Push notifications",
+        "Observability",
+        "Developer tooling",
+        "AI workflow integration",
+        "System architecture"
+      ],
+      "personas": [
+        {
+          "name": "Developer",
+          "need": "Runs multiple development tools and wants visibility without continuously watching terminals."
+        },
+        {
+          "name": "Technical Lead",
+          "need": "Wants a high-level view of tasks and failures across projects."
+        },
+        {
+          "name": "Solo Builder",
+          "need": "Uses AI agents while moving between desktop and phone."
+        }
+      ],
+      "mvp": {
+        "authentication": [
+          "register",
+          "login",
+          "logout",
+          "refresh sessions"
+        ],
+        "projects": [
+          "create project",
+          "rename project",
+          "archive project",
+          "see project health",
+          "view project activity"
+        ],
+        "agents": {
+          "fields": [
+            "id",
+            "name",
+            "project",
+            "type",
+            "state",
+            "current_task",
+            "started_time",
+            "heartbeat",
+            "latest_message"
+          ],
+          "states": [
+            "offline",
+            "idle",
+            "running",
+            "waiting",
+            "needs_approval",
+            "failed",
+            "completed"
+          ]
+        },
+        "tasks": [
+          "create task",
+          "assign agent",
+          "see status",
+          "inspect events",
+          "cancel task",
+          "retry failed task"
+        ],
+        "realtime_events": [
+          "agent.connected",
+          "agent.disconnected",
+          "agent.started",
+          "task.started",
+          "task.progress",
+          "task.failed",
+          "task.completed",
+          "approval.requested",
+          "approval.accepted",
+          "approval.denied"
+        ],
+        "mobile_inbox": [
+          "failures",
+          "approvals",
+          "completed jobs",
+          "warnings",
+          "system notices"
+        ],
+        "approval_system": {
+          "required": true,
+          "actions": [
+            "reject",
+            "approve"
+          ],
+          "goal": "Allow an agent to pause and request human approval."
+        }
+      },
+      "backend_requirements": {
+        "concurrency": {
+          "use_goroutines_for": [
+            "agent connections",
+            "event processing",
+            "heartbeat monitoring",
+            "notification dispatch",
+            "background cleanup"
+          ],
+          "rule": "Do not use concurrency merely for demonstration."
+        },
+        "channels": [
+          "event fan-out",
+          "internal message passing",
+          "job dispatch"
+        ],
+        "realtime_transport": {
+          "primary": "WebSocket",
+          "secondary": "Server-Sent Events"
+        },
+        "event_broker": {
+          "required": true,
+          "event_fields": [
+            "ID",
+            "Type",
+            "ProjectID",
+            "AgentID",
+            "Payload",
+            "CreatedAt"
+          ]
+        }
+      },
+      "stretch_features": [
+        "GitHub integration",
+        "Git worktree detection",
+        "terminal agent bridge",
+        "Codex integration",
+        "Claude Code integration",
+        "local agent connector",
+        "task dependencies",
+        "multiple users",
+        "organizations",
+        "usage metrics",
+        "project timelines",
+        "desktop notification bridge",
+        "encrypted remote commands"
+      ],
+      "completion_definition": [
+        "user can authenticate",
+        "projects can be created",
+        "agents can register",
+        "agents can emit heartbeats",
+        "agent state changes appear realtime",
+        "tasks can be created",
+        "task events stream to mobile",
+        "approval requests work",
+        "notifications have read/unread state",
+        "events persist in PostgreSQL",
+        "backend tests pass",
+        "CI passes",
+        "system runs through Docker",
+        "README documents architecture",
+        "demo environment contains seed data"
+      ],
+      "seed_data": {
+        "projects": 3,
+        "agents": 5,
+        "tasks": 12,
+        "alerts": 2,
+        "approval_requests": 1,
+        "historical_events": 18
+      },
+      "performance_target_example": "1,000 simultaneous simulated agent events"
+    },
+    "OpsTrack": {
+      "priority": 2,
+      "category": "Field Operations & Work Management Platform",
+      "description": "A mobile-first operations system for technicians, maintenance teams, inspectors, and field workers.",
+      "roles": [
+        "worker",
+        "supervisor",
+        "admin"
+      ],
+      "mvp": {
+        "work_order_fields": [
+          "title",
+          "description",
+          "location",
+          "priority",
+          "assigned_employee",
+          "due_date",
+          "status",
+          "instructions",
+          "attachments",
+          "completion_evidence"
+        ],
+        "work_order_states": [
+          "new",
+          "assigned",
+          "accepted",
+          "in_progress",
+          "blocked",
+          "completed",
+          "verified",
+          "cancelled"
+        ],
+        "state_transition_rule": "Invalid transitions must be rejected by the backend.",
+        "mobile_features": [
+          "view assigned jobs",
+          "accept assignment",
+          "start work",
+          "add notes",
+          "take photos",
+          "scan QR equipment tags",
+          "mark blocked",
+          "complete work",
+          "collect completion evidence"
+        ]
+      },
+      "offline_first": {
+        "required": true,
+        "persist_locally": [
+          "job data",
+          "notes",
+          "status changes",
+          "captured evidence metadata",
+          "pending updates"
+        ],
+        "sync_states": [
+          "synced",
+          "syncing",
+          "pending",
+          "conflict",
+          "failed"
+        ],
+        "behavior": "Queued operations synchronize when connectivity returns."
+      },
+      "audit_system": {
+        "required": true,
+        "immutable_for_normal_users": true,
+        "fields": [
+          "actor",
+          "action",
+          "work_order",
+          "timestamp"
+        ]
+      },
+      "stretch_features": [
+        "GPS arrival confirmation",
+        "supervisor dashboard",
+        "recurring work orders",
+        "equipment records",
+        "signature capture",
+        "PDF service reports",
+        "scheduling",
+        "route optimization",
+        "customer portal",
+        "push notifications"
+      ],
+      "completion_definition": [
+        "worker can authenticate",
+        "work orders appear on mobile",
+        "job details work offline",
+        "worker can change job states",
+        "invalid transitions are rejected",
+        "photos can be attached",
+        "QR codes can be scanned",
+        "pending changes synchronize",
+        "audit log records actions",
+        "role permissions work",
+        "tests pass",
+        "CI passes",
+        "project is documented"
+      ],
+      "seed_data": {
+        "work_orders": 8,
+        "workers": 3,
+        "supervisors": 1,
+        "include": [
+          "multiple job statuses",
+          "photos/placeholders",
+          "audit events"
+        ]
+      },
+      "performance_target_example": "1,000 work-order queries"
+    },
+    "ScanStock": {
+      "priority": 3,
+      "category": "Inventory & Warehouse Operations System",
+      "description": "A mobile-first inventory management system focused on correct stock movement and transactional integrity.",
+      "core_model": {
+        "inventory_strategy": "Ledger-based inventory movements rather than directly storing only a mutable quantity.",
+        "movement_examples": [
+          "+100 received",
+          "-5 shipped",
+          "-2 damaged",
+          "+1 correction"
+        ],
+        "current_quantity": "Calculated from inventory movements."
+      },
+      "mvp": [
+        "create products",
+        "scan products",
+        "receive inventory",
+        "remove inventory",
+        "perform stock counts",
+        "record damage",
+        "record adjustments",
+        "search inventory",
+        "view item history"
+      ],
+      "product_fields": [
+        "ID",
+        "SKU",
+        "UPC",
+        "Name",
+        "Description",
+        "Location",
+        "ReorderLevel",
+        "CreatedAt",
+        "UpdatedAt"
+      ],
+      "inventory_transaction_fields": [
+        "transaction_id",
+        "product_id",
+        "quantity_change",
+        "transaction_type",
+        "user_id",
+        "device_id",
+        "reference",
+        "timestamp",
+        "idempotency_key"
+      ],
+      "idempotency": {
+        "required": true,
+        "behavior": "Duplicate requests with the same idempotency key must return the previous result instead of applying the inventory movement twice."
+      },
+      "conflict_handling": {
+        "required": true,
+        "outcomes": [
+          "succeeds",
+          "merges",
+          "requires review",
+          "fails"
+        ],
+        "ui_requirement": "Conflict states must be visible to users."
+      },
+      "stretch_features": [
+        "purchase orders",
+        "suppliers",
+        "multi-warehouse",
+        "inventory transfers",
+        "reorder alerts",
+        "CSV import/export",
+        "cycle counts",
+        "warehouse dashboards",
+        "printable labels",
+        "reports"
+      ],
+      "completion_definition": [
+        "users can authenticate",
+        "products can be created",
+        "barcode scanning works",
+        "inventory can be received",
+        "inventory can be adjusted",
+        "ledger records every change",
+        "inventory totals derive correctly",
+        "duplicate requests are idempotent",
+        "offline actions synchronize",
+        "conflicts are surfaced",
+        "tests pass",
+        "CI passes",
+        "project is documented"
+      ],
+      "seed_data": {
+        "products": 25,
+        "include": [
+          "inventory history",
+          "warehouse locations",
+          "completed counts",
+          "damaged inventory",
+          "receipts"
+        ]
+      },
+      "performance_target_example": "10,000 inventory transactions"
+    }
+  },
+  "cross_cutting_architecture": {
+    "authentication": {
+      "flow": [
+        "email/password",
+        "Go API",
+        "access token",
+        "refresh token",
+        "Expo SecureStore"
+      ],
+      "backend_requirements": [
+        "access-token expiration",
+        "refresh tokens",
+        "logout/revocation",
+        "password hashing",
+        "authorization middleware"
+      ]
+    },
+    "authorization": {
+      "rule": "Permissions must be enforced on the Go backend, never exclusively by the mobile UI."
+    },
+    "api_design": {
+      "convention": "Consistent /api/v1 resource routes",
+      "success_shape": {
+        "data": {},
+        "error": null
+      },
+      "error_shape": {
+        "data": null,
+        "error": {
+          "code": "machine_readable_error_code",
+          "message": "Human-readable error message"
+        }
+      },
+      "documentation": "Each repository must contain an OpenAPI specification."
+    },
+    "error_handling": [
+      "invalid input",
+      "expired credentials",
+      "missing resources",
+      "duplicate requests",
+      "authorization failures",
+      "database failures",
+      "network interruptions",
+      "timeout conditions",
+      "offline actions",
+      "conflicting updates"
+    ],
+    "logging": {
+      "format": "structured JSON",
+      "example_fields": [
+        "level",
+        "request_id",
+        "method",
+        "path",
+        "status",
+        "duration_ms"
+      ],
+      "never_log": [
+        "passwords",
+        "authentication tokens",
+        "private credentials"
+      ]
+    },
+    "observability": {
+      "minimum": [
+        "request logging",
+        "error logging",
+        "health endpoint",
+        "readiness endpoint",
+        "request IDs"
+      ],
+      "endpoints": [
+        "/health",
+        "/ready"
+      ],
+      "stretch": [
+        "metrics",
+        "OpenTelemetry",
+        "tracing"
+      ]
+    },
+    "security": [
+      "hashed passwords",
+      "parameterized SQL",
+      "server-side authorization",
+      "environment-based secrets",
+      "input validation",
+      "request-size limits",
+      "rate limiting where appropriate",
+      "token expiration",
+      "CORS configuration",
+      "secure file upload rules",
+      "no secrets in Git history"
+    ]
+  },
+  "testing_strategy": {
+    "go": {
+      "unit_tests": [
+        "valid workflow transition",
+        "invalid workflow transition",
+        "inventory calculation",
+        "duplicate idempotency key",
+        "permissions"
+      ],
+      "integration_tests": [
+        "HTTP",
+        "service",
+        "repository",
+        "test database"
+      ]
+    },
+    "mobile": [
+      "business-critical hooks",
+      "offline queue behavior",
+      "form validation",
+      "state transitions",
+      "synchronization logic"
+    ],
+    "code_quality_commands": {
+      "go": [
+        "gofmt",
+        "go vet ./...",
+        "go test ./..."
+      ],
+      "typescript": [
+        "npm run lint",
+        "npm run typecheck",
+        "npm test"
+      ]
+    }
+  },
+  "local_development": {
+    "expected_bootstrap": [
+      "git clone <repo>",
+      "cd <repo>",
+      "cp .env.example .env",
+      "docker compose up -d",
+      "make dev"
+    ],
+    "rule": "README must explain any additional Expo/mobile setup."
+  },
+  "documentation": {
+    "case_study_structure": [
+      "Problem",
+      "Product",
+      "Architecture",
+      "Important engineering decisions",
+      "Difficult technical problem",
+      "How it was solved",
+      "Screenshots",
+      "System diagram",
+      "Testing",
+      "What I would build next",
+      "Source code"
+    ],
+    "readme_sections": [
+      "Why I Built It",
+      "Features",
+      "Architecture",
+      "Tech Stack",
+      "Running Locally",
+      "Testing",
+      "API",
+      "Engineering Decisions",
+      "Screenshots",
+      "Future Work"
+    ],
+    "adr": {
+      "directory": "docs/decisions/",
+      "examples": [
+        "001-use-postgresql.md",
+        "002-offline-sync-strategy.md",
+        "003-websocket-event-model.md",
+        "004-inventory-ledger.md"
+      ],
+      "required_sections": [
+        "Context",
+        "Decision",
+        "Alternatives considered",
+        "Tradeoffs"
+      ]
+    }
+  },
+  "git_and_ci": {
+    "branches": [
+      "main",
+      "feature/*",
+      "fix/*"
+    ],
+    "commit_rule": "Commits should explain actual changes and avoid vague messages.",
+    "pipeline": [
+      "Checkout",
+      "Install Go",
+      "Go format check",
+      "Go vet",
+      "Go tests",
+      "Install Node",
+      "Lint",
+      "TypeScript check",
+      "Mobile tests",
+      "Build verification"
+    ]
+  },
+  "development_philosophy": {
+    "priority_order": [
+      "correctness",
+      "maintainability",
+      "clear architecture",
+      "usability",
+      "observability",
+      "performance"
+    ],
+    "rule": "Fancy animations are secondary."
+  },
+  "ai_usage": {
+    "AgentWatch": "Core use case",
+    "OpsTrack": [
+      "optional note summarization",
+      "optional issue classification",
+      "optional work-order suggestions"
+    ],
+    "ScanStock": "No AI required",
+    "rule": "Avoid turning every portfolio project into an AI wrapper."
+  },
+  "cost_constraint": {
+    "core_rule": "The core portfolio must run without paid external APIs.",
+    "local_dependencies": [
+      "Go",
+      "Node",
+      "Expo",
+      "PostgreSQL",
+      "Docker"
+    ],
+    "optional_integrations": "May be added later."
+  },
+  "build_plan": [
+    {
+      "phase": 1,
+      "name": "Shared Foundation",
+      "deliverables": [
+        "Go server",
+        "configuration",
+        "database",
+        "authentication",
+        "logging",
+        "migrations",
+        "error responses",
+        "Expo networking",
+        "authentication storage"
+      ],
+      "constraint": "Do not create a large shared framework. Copying small proven patterns between independent repos is acceptable."
+    },
+    {
+      "phase": 2,
+      "name": "AgentWatch",
+      "reason": [
+        "most differentiated",
+        "closest to existing product interests",
+        "strongest Go concurrency demonstration",
+        "useful as a real personal tool",
+        "expandable into a standalone product"
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "OpsTrack",
+      "reason": [
+        "mobile capability",
+        "operational software",
+        "offline workflows",
+        "device integration",
+        "business-state modeling"
+      ]
+    },
+    {
+      "phase": 4,
+      "name": "ScanStock",
+      "reason": [
+        "backend correctness",
+        "data modeling",
+        "transactions",
+        "distributed-client problems",
+        "inventory domain logic"
+      ]
+    }
+  ],
+  "success_metrics": {
+    "reviewer_should_confirm": [
+      "production-style Go",
+      "mobile engineering",
+      "TypeScript",
+      "SQL",
+      "API design",
+      "concurrency",
+      "offline systems",
+      "database architecture",
+      "testing",
+      "authentication",
+      "authorization",
+      "Docker",
+      "CI",
+      "realtime systems",
+      "technical documentation",
+      "product thinking"
+    ],
+    "evidence_rule": "The repositories themselves should provide the evidence."
+  },
+  "portfolio_presentation": {
+    "featured": [
+      {
+        "name": "AgentWatch",
+        "tagline": "Realtime developer-agent operations platform."
+      },
+      {
+        "name": "OpsTrack",
+        "tagline": "Offline-first field operations application."
+      },
+      {
+        "name": "ScanStock",
+        "tagline": "Transactional inventory and warehouse platform."
+      }
+    ],
+    "secondary_work": [
+      "Ders",
+      "Anderson AI OS",
+      "BNS Foundry",
+      "mobile applications",
+      "games",
+      "experiments"
+    ]
+  }
+}

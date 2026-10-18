@@ -1,0 +1,55 @@
+openapi: 3.1.0
+info:
+  title: AgentWatch API
+  version: 0.1.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /health:
+    get:
+      responses: {"200": {description: OK}}
+  /api/v1/auth/login:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [Email, Password]
+              properties:
+                Email: {type: string}
+                Password: {type: string}
+      responses: {"200": {description: Authenticated}}
+  /api/v1/projects:
+    get:
+      security: [{bearerAuth: []}]
+      responses: {"200": {description: Project list}}
+    post:
+      security: [{bearerAuth: []}]
+      responses: {"201": {description: Project created}}
+  /api/v1/agents:
+    get:
+      security: [{bearerAuth: []}]
+      responses: {"200": {description: Agent list}}
+  /api/v1/agents/heartbeat:
+    post:
+      security: [{bearerAuth: []}]
+      responses: {"200": {description: Agent heartbeat recorded}}
+  /api/v1/tasks:
+    get:
+      security: [{bearerAuth: []}]
+      responses: {"200": {description: Task list}}
+    post:
+      security: [{bearerAuth: []}]
+      responses: {"201": {description: Task created}}
+  /api/v1/approvals:
+    get:
+      security: [{bearerAuth: []}]
+      responses: {"200": {description: Approval list}}
+    post:
+      security: [{bearerAuth: []}]
+      responses: {"201": {description: Approval requested}}
+components:
+  securitySchemes:
+    bearerAuth: {type: http, scheme: bearer}

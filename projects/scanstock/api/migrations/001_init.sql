@@ -1,0 +1,5 @@
+CREATE TABLE users(id text PRIMARY KEY,email text UNIQUE NOT NULL,password_hash text NOT NULL,role text NOT NULL,created_at timestamptz NOT NULL DEFAULT now());
+CREATE TABLE products(id text PRIMARY KEY,sku text UNIQUE NOT NULL,upc text UNIQUE,name text NOT NULL,description text NOT NULL DEFAULT '',location text NOT NULL DEFAULT '',reorder_level integer NOT NULL DEFAULT 0,created_at timestamptz NOT NULL DEFAULT now(),updated_at timestamptz NOT NULL DEFAULT now());
+CREATE TABLE inventory_transactions(transaction_id text PRIMARY KEY,product_id text NOT NULL REFERENCES products(id),quantity_change integer NOT NULL CHECK(quantity_change<>0),transaction_type text NOT NULL,user_id text NOT NULL REFERENCES users(id),device_id text NOT NULL,reference text NOT NULL DEFAULT '',timestamp timestamptz NOT NULL DEFAULT now(),idempotency_key text UNIQUE NOT NULL);
+CREATE INDEX idx_inventory_product_time ON inventory_transactions(product_id,timestamp DESC);
+CREATE VIEW stock_on_hand AS SELECT p.id product_id,COALESCE(SUM(t.quantity_change),0)::bigint quantity FROM products p LEFT JOIN inventory_transactions t ON t.product_id=p.id GROUP BY p.id;
